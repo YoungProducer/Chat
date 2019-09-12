@@ -8,11 +8,11 @@ interface I_App {
   messagesList: MessagesList;
 }
 
+
 @observer
 export class App extends React.Component<I_App, {}> {
   render() {
     const { messagesList } = this.props;
-    console.log(messagesList)
     return (
       <div>
         {messagesList.allMessages.map(message => (

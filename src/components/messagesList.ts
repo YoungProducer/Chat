@@ -1,5 +1,5 @@
 import {action, observable} from "mobx";
-import {I_Message } from "./message";
+import {I_Message} from './message'
 
 export class MessagesList {
     @observable messages: I_Message[] = [];
