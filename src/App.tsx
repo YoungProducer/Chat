@@ -1,26 +1,26 @@
 import React from "react";
-import { observer } from "mobx-react";
+import {observer, Provider} from "mobx-react";
 
-import { MessagesList } from "./components/messagesList";
-import { MessageWriter } from "./components/messageWriter";
-
-interface I_App {
-  messagesList: MessagesList;
-}
-
+import { ChatStore } from './components/ChatStore'
+import { MessagesList } from "./components/MessageList";
 
 @observer
-export class App extends React.Component<I_App, {}> {
-  render() {
-    const { messagesList } = this.props;
-    return (
-      <div>
-        {messagesList.allMessages.map(message => (
-          <p key={message.id}>{message.body}</p>
-        ))}
+export class App extends React.Component {
+    private chatStore: ChatStore = new ChatStore();
 
-        <MessageWriter store={messagesList} />
-      </div>
-    );
-  }
+    componentDidMount(): void {
+        this.chatStore.addMessage(Math.random(), "hey, geyyy", "me", "you");
+    }
+
+    render() {
+        return(
+            <div>
+                <h1>hello</h1>
+                <Provider chatStore={this.chatStore}>
+                    <MessagesList />
+                </Provider>
+            </div>
+        )
+    }
+
 }

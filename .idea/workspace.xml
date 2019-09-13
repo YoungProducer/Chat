@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1a363e2a-59cd-4886-aa10-d2b00a7d285b" name="Default Changelist" comment="" />
+    <list default="true" id="1a363e2a-59cd-4886-aa10-d2b00a7d285b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/ChatStore.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Message.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/MessageList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/message.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/messageWriter.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/messagesList.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -47,7 +64,7 @@
       <workItem from="1568145946278" duration="2332000" />
       <workItem from="1568228010731" duration="5910000" />
       <workItem from="1568276116129" duration="4489000" />
-      <workItem from="1568319875533" duration="12000" />
+      <workItem from="1568355407788" duration="4636000" />
     </task>
     <servers />
   </component>
