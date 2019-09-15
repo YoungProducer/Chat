@@ -2,15 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1a363e2a-59cd-4886-aa10-d2b00a7d285b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/ChatStore.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Message.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/MessageList.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/message.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/messageWriter.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/messagesList.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ChatStore.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Message.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/MessageList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MessageList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,7 +34,7 @@
     <property name="prettierjs.PrettierConfiguration.NodeInterpreter" value="project" />
     <property name="prettierjs.PrettierConfiguration.Package" value="D:\repos\Chat\node_modules\prettier" />
     <property name="settings.editor.selected.configurable" value="settings.javascript.prettier" />
-    <property name="ts.external.directory.path" value="D:\repos\Chat\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="E:\web\WebSites\Chat\node_modules\typescript\lib" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -65,6 +62,8 @@
       <workItem from="1568228010731" duration="5910000" />
       <workItem from="1568276116129" duration="4489000" />
       <workItem from="1568355407788" duration="4636000" />
+      <workItem from="1568447574221" duration="1817000" />
+      <workItem from="1568522890930" duration="22000" />
     </task>
     <servers />
   </component>
