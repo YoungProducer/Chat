@@ -2,6 +2,7 @@ import React from "react";
 import {observer, Provider} from "mobx-react";
 import axios from "axios";
 
+import { signUp } from "./middleware"
 import { ChatStore, chatStore } from './store/ChatStore'
 import { MessagesList } from "./components/MessageList";
 import { MessageWriter } from "./components/MessageWriter";
@@ -29,28 +30,19 @@ export class App extends React.Component {
     componentDidMount() {
         let axiosConfig = {
             params: {
-                where: {
-                    password: "hello"
+                filter: {
+                    email: "sasha@gmail.com"
                 }
             }
         }
 
-        axios.get('http://lvh.me:3000/users', axiosConfig)
+        axios.get('http://lvh.me:3000/signin?filter[email]=sasha@gmail.com')
         .then(response => {
             console.log(response)
         }) 
         .catch(error => {
             console.log(error)
         }) 
-    }
-
-    signUp = (email: string, password: string) => {
-        axios.post('http://lvh.me:3000/signup', {
-            email: email,
-            password: password
-        })
-        .then(response => console.log(response))
-        .catch(error => console.log(error))
     }
 
     signIn = (email: string, password: string) => {
@@ -62,7 +54,7 @@ export class App extends React.Component {
             }
         }
 
-        axios.get('http://lvh.me:3000/users', config)
+        axios.get('http://lvh.me:3000/signin', config)
         .then(response => console.log(response))
         .catch(error => console.log(error))
     }
@@ -71,7 +63,7 @@ export class App extends React.Component {
         return(
             <div>
                 <h1>SignUp</h1>
-                <SignUp signUp={this.signUp} />
+                <SignUp signUp={signUp} />
                 <h1>SignIn</h1>
                 <SignIn signIn={this.signIn} />
             </div>
