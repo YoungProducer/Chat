@@ -1,13 +1,14 @@
 import React from "react";
-import { observer } from "mobx-react";
+import {E_ActionResponse, I_RequestResponse} from "../../middleware"
 
 interface I_SignInState {
     email: string,
     password: string,
+    actionResponse: E_ActionResponse
 }
 
 interface I_SignInProps {
-    signIn(email: string, password: string): void
+    signIn(email: string, password: string): Promise<I_RequestResponse>
 }
 
 export class SignIn extends React.Component<I_SignInProps, I_SignInState> {
@@ -17,7 +18,8 @@ export class SignIn extends React.Component<I_SignInProps, I_SignInState> {
 
         this.state = {
             email: "",
-            password: ""
+            password: "",
+            actionResponse: E_ActionResponse.DEFAULT
         }
     }
 
@@ -33,15 +35,29 @@ export class SignIn extends React.Component<I_SignInProps, I_SignInState> {
         }
     }
 
+    buttonOnClickHandle = async (email: string, password: string) => {
+        const {signIn} = this.props;
+
+        await signIn(email, password)
+        .then(response => {
+            console.log(response)
+            this.setState({actionResponse: response.actionResponse})
+        })
+        .catch(error => {
+            console.log(error)
+        });
+    }
+
     render() {
-        const { signIn } = this.props;
-        const { email, password } = this.state;
+        const {buttonOnClickHandle} = this;
+        const { email, password, actionResponse } = this.state;
 
         return(
             <div>
+                {actionResponse === E_ActionResponse.SUCCESS ? <p>Logged in</p> : null}
                 <input type="email" placeholder="email" name="email" onChange={this.inputHandleOnChange} />
                 <input type="password" placeholder="password" name="password" onChange={this.inputHandleOnChange} />
-                <button onClick={() => signIn(email, password)}>SignUp</button>
+                <button onClick={() => buttonOnClickHandle(email, password)}>SignIn</button>
             </div>
         )
     }

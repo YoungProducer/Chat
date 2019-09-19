@@ -1,16 +1,16 @@
 import React from "react";
 import { observer } from "mobx-react";
-import { Response } from "../../middleware"
+import { E_ActionResponse, I_RequestResponse } from "../../middleware"
 
 interface I_SignUpState {
     email: string,
     password: string,
     repeatedPassword: string,
-    response: Response
+    actionResponse: E_ActionResponse
 }
 
 interface I_SignUpProps {
-    signUp(email: string, password: string, passwordRepeat: string): Response
+    signUp(email: string, password: string, passwordRepeat: string): Promise<I_RequestResponse>
 }
 
 @observer
@@ -23,7 +23,7 @@ export class SignUp extends React.Component<I_SignUpProps, I_SignUpState> {
             email: "",
             password: "",
             repeatedPassword: "",
-            response: Response.DEFAULT
+            actionResponse: E_ActionResponse.DEFAULT
         }
     }
 
@@ -42,28 +42,25 @@ export class SignUp extends React.Component<I_SignUpProps, I_SignUpState> {
         }
     }
 
-    buttonHandleOnClick = (email: string, password: string, repeatedPassword: string) => {
+    buttonHandleOnClick = async (email: string, password: string, repeatedPassword: string) => {
         const { signUp } = this.props;
 
-        console.log(password === repeatedPassword)
-
-        this.setState({
-            response: signUp(email, password, repeatedPassword)
-        })
-    } 
+        await signUp(email, password, repeatedPassword)
+        .then(response => this.setState({actionResponse: response.actionResponse}))
+        .catch(error => console.log(error));
+    }
 
     render() {
         const { buttonHandleOnClick } = this;
-        const { email, password, repeatedPassword, response  } = this.state;
-
-        console.log(this.state.response)
+        const { email, password, repeatedPassword, actionResponse  } = this.state;
 
         return(
             <div>
+                {actionResponse === E_ActionResponse.EMAIL_ALREADY_EXIST ? <p>Email already exist</p> : null}
                 <p>Enter your email</p>
                 <input type="email" placeholder="email" name="email" onChange={this.inputHandleOnChange} />
                 <p>Enter password: (minimum 6 symbols)</p>
-                {response === Response.DIFFERENT_PASSWORDS ? <p>Password are different</p> : null}
+                {actionResponse === E_ActionResponse.DIFFERENT_PASSWORDS ? <p>Password are different</p> : null}
                 <input type="password" placeholder="password" name="password" onChange={this.inputHandleOnChange} />
                 <p>Repeat password</p>
                 <input type="password" placeholder="password" name="repeatedPassword" onChange={this.inputHandleOnChange} />
