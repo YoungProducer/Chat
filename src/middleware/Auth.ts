@@ -11,22 +11,22 @@ export const signUp: I_SignUp = async (email, password, repeatedPassword) => {
         actionResponse: E_ActionResponse.DEFAULT
     }
 
-    if (password.length >= 6 && repeatedPassword.length >= 6) {
+    // if (password.length >= 6 && repeatedPassword.length >= 6) {
         if (password === repeatedPassword) {
             const requestBody: I_SignUpRequestBody = {
                 email: email,
                 password: password
             }
     
-            await axios.post("http://lvh.me:3000/signup", requestBody)
+            await axios.post("http://lvh.me:3000/users", requestBody)
             .then(response => {
                 requestResponse.actionResponse = response.data.actionResponse;
             })
             .catch(error => {
-                console.log(error);
+                console.log(error.response);
             });
         } else requestResponse.actionResponse = E_ActionResponse.DIFFERENT_PASSWORDS;
-    } else requestResponse.actionResponse = E_ActionResponse.SHORT_PASSWORD;
+    // } else requestResponse.actionResponse = E_ActionResponse.SHORT_PASSWORD;
 
     return requestResponse;
 }
