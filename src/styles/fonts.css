@@ -1,0 +1,5 @@
+@font-face {
+    font-family: "ProductSans";
+    src: url('../fonts/ProductSans-Light.ttf') format('ttf');
+    font-weight: lighter;
+}
