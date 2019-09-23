@@ -46,7 +46,10 @@ export class SignUp extends React.Component<I_SignUpProps, I_SignUpState> {
         const { signUp } = this.props;
 
         await signUp(email, password, repeatedPassword)
-        .then(response => this.setState({actionResponse: response.actionResponse}))
+        .then(response => {
+            this.setState({actionResponse: response.actionResponse})
+            console.log(response);
+        })
         .catch(error => console.log(error));
     }
 
