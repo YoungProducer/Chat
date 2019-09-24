@@ -37,11 +37,11 @@ module.exports = {
         ]
       },
       {
-        test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-        loader: "url-loader?limit=100000"
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        loader: "file-loader?name=fonts/[name].[ext]",
       },
       {
-        test: /\.(gif|png|jpg)$/,
+        test: /\.(gif|png|jpg|svg)$/,
         loader: "file-loader?name=/img/[name].[ext]",
         options: {
           // name: './img/[name].[ext]',

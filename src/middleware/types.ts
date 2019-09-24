@@ -14,20 +14,7 @@ export interface I_RequestResponse {
     actionResponse: E_ActionResponse
 }
 
-type T_SignUp = {
-    data: "SUCCES" | "ERROR"
-}
-
-export interface I_SignUpResponse {
-    string: T_SignUp
-}
-
-export interface I_SignUpRequestBody {
-    email: string,
-    password: string
-}
-
-export interface I_SignInRequestBody {
+export interface I_AuthCredentials {
     email: string,
     password: string
 }

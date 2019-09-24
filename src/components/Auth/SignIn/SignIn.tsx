@@ -20,13 +20,29 @@ export class SignIn extends React.Component<I_SignInProps, I_SignInState> {
         }
     }
 
+    inputHandleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const name = event.target.name;
+        const value = event.target.value;
+
+        if (name === "email") {
+            this.setState({
+                email: value
+            })
+        }
+        if (name === "password") {
+            this.setState({
+                password: value
+            })
+        }
+    }
+
     render() {
         return(
-            <div className="wrapper">
-                <h1 className="title">Sign in</h1>
-                <input className="input" type="email" name="email" placeholder="email" />
-                <input className="input" type="password" name="password" placeholder="password" />
-                <button className="confirmation">Sign in</button>
+            <div className="auth-wrapper">
+                <h1 className="auth-title">Sign in</h1>
+                <input className="auth-input" type="email" name="email" placeholder="email" onChange={this.inputHandleOnChange}/>
+                <input className="auth-input" type="password" name="password" placeholder="password" onChange={this.inputHandleOnChange}/>
+                <button className="auth-confirmation">Sign in</button>
             </div>
         )
     }

@@ -1,8 +1,6 @@
 import React from "react";
-// import { signUp, signIn } from "./middleware"
-// import { SignUp, SignIn } from "./components/Auth";
-import {SignIn} from "./components/Auth/SignIn/SignIn"
-import axios from "axios"
+import {Auth} from "./components/Auth"
+import {AuthService} from "./middleware/index"
 
 export class App extends React.Component {
     render() {
@@ -12,7 +10,7 @@ export class App extends React.Component {
                 <SignUp signUp={signUp} />
                 <h1>SignIn</h1>
                 <SignIn signIn={signIn} /> */}
-                <SignIn />
+                <Auth />
             </>
         )
     }

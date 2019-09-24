@@ -1,13 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
-// import './styles/main.scss'
+import {Provider} from "mobx-react";
+import {AuthService} from "./middleware"
 import "./index.css"
 
 import { App } from "./App";
 
+const authService = new AuthService();
 const rootElement = document.getElementById("root");
 
 ReactDOM.render(
-  <App />,
+  <Provider authService={authService}>
+    <App />
+  </Provider>,
   rootElement
 );

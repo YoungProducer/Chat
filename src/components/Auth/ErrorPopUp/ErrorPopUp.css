@@ -1,0 +1,18 @@
+.err-pop-up-wrapper {
+    display: inline-block;
+    min-width: 240px;
+    z-index: 2;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+}
+
+.err-pop-up-title {
+    color: #333;
+    font-family: "ProductSans-Light";
+}
+
+.err-pop-up-message {
+    color: rgb(253, 51, 51);
+    font-family: "ProductSans-Light";
+}
