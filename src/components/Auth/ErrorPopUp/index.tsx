@@ -2,13 +2,13 @@ import React from "react";
 import {Wrapper} from "./index.posed"
 import "./ErrorPopUp.css"
 
-interface IP_ErroPopUp {
+interface IP_ErrorPopUp {
     title?: string,
     message?: string,
     pose?: string
 }
 
-export const ErrorPopUp = ({message, pose}: IP_ErroPopUp) => {
+export const ErrorPopUp = ({message, pose}: IP_ErrorPopUp) => {
 
     return (
         <Wrapper className="err-pop-up-wrapper" pose={pose}>

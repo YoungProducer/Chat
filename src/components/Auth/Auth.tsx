@@ -1,17 +1,19 @@
 import React from "react";
-import {SignIn, SignUp, ErrorPopUp} from "./index";
-import {AuthService} from "../../middleware/index";
+import {SignIn, SignUp, ErrorPopUp} from "./";
+import {AuthService, ResponsesService} from "../../middleware";
 import "./Auth.css";
+import { inject, observer } from "mobx-react";
 
-interface I_AuthProps {
+interface IP_Auth {
+    responsesService?: ResponsesService
 }
 
-export const Auth = (props: I_AuthProps) => {
-    return (
-        <div className="eclipse">
-            <ErrorPopUp message="Email already exist!" pose="hidden" />
+export const Auth = inject('responsesService')(observer((props: IP_Auth) => {
+    return(
+        <div >
+            {/* <ErrorPopUp message={props.responsesService.responseMessage} pose="visible" /> */}
             <SignUp />
             {/* <SignIn /> */}
         </div>
     )
-}
+}))

@@ -1,10 +1,10 @@
 .err-pop-up-wrapper {
-    display: inline-block;
-    min-width: 240px;
+    width: 240px;
     z-index: 2;
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
     background-color: #fff;
+    position: absolute;
 }
 
 .err-pop-up-title {

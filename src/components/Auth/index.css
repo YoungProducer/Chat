@@ -1,16 +1,22 @@
-.auth-wrapper {
+.main-auth-wrapper {
     display: inline-block;
     z-index: 2;
     /* border-radius: 10px; */
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     background-color: #fff;
-    padding: 20px;
 
     position: fixed;
 
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+}
+
+.auth-wrapper {
+    background-color: #fff;
+    padding: 20px;
+    z-index: 3;
+    position: relative;
 }
 
 .auth-title {
