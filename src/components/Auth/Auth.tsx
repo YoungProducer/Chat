@@ -1,19 +1,25 @@
-import React from "react";
+import React, {useState} from "react";
 import {SignIn, SignUp, ErrorPopUp} from "./";
-import {AuthService, ResponsesService} from "../../middleware";
+import {AuthService} from "../../middleware";
 import "./Auth.css";
 import { inject, observer } from "mobx-react";
 
 interface IP_Auth {
-    responsesService?: ResponsesService
 }
 
-export const Auth = inject('responsesService')(observer((props: IP_Auth) => {
+export const Auth = (props: IP_Auth) => {
+    const [type, setType] = useState("signUp");
+
     return(
-        <div >
+        <div className="auth">
             {/* <ErrorPopUp message={props.responsesService.responseMessage} pose="visible" /> */}
-            <SignUp />
-            {/* <SignIn /> */}
+            {
+                type === "signUp" ? (
+                    <SignUp callback={setType}/>
+                ) : (
+                    <SignIn callback={setType}/>
+                )
+            }
         </div>
     )
-}))
+}

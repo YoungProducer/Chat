@@ -20,18 +20,29 @@
 }
 
 .auth-title {
-    color: rgb(81, 0, 128);
+    /* color: rgb(81, 0, 128); */
+    color: rgb(2, 161, 224);
     text-align: center;
     font-family: "ProductSans-Light";
     font-weight: bold;
     margin-bottom: 20px;
+    /* transform: translate3d(0,0,0); */
+
+}
+
+.auth-input-title {
+    color: #555;
+    /* padding-left: 10px; */
+    font-family: "ProductSans-Light";
+    margin-bottom: 5px;
 }
 
 .auth-input {
     display: block;
-    width: 200px;
-    height: 30px;
-    border: 2px solid rgb(81, 0, 128);
+    width: 240px;
+    height: 40px;
+    /* border: 2px solid rgb(81, 0, 128); */
+    border: 2px solid rgb(2, 161, 224);
     /* border-radius: 5px; */
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     outline: none;
@@ -39,16 +50,21 @@
     padding-left: 10px;
     margin-bottom: 20px;
 
-    transition: border-color .2s ease-in-out;
+    font-family: "ProductSans-Light";
+    font-size: 16px;
+
+    transition: border-color .3s ease-in-out;
 }
 
 .auth-input:hover {
-    border-color: rgb(120, 0, 189);
-    transition: border-color .2s ease-in-out;
+    /* border-color: rgb(120, 0, 189); */
+    border-color: rgb(1, 134, 187);
+    transition: border-color .3s ease-in-out;
 }
 
 .auth-input:focus {
-    border-color: rgb(120, 0, 189);
+    /* border-color: rgb(120, 0, 189); */
+    border-color: rgb(1, 134, 187);
     transition: border-color .2s ease-in-out;
 }
 
@@ -58,13 +74,16 @@
 
 .auth-confirmation {
     display: block;
-    width: 200px;
-    height: 30px;
+    width: 240px;
+    height: 40px;
     border: none;
-    /* border-radius: 5px; */
     background: #4CAF50;
     color: #fff;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    outline: none;
+
+    font-family: "ProductSans-Light";
+    font-size: 16px;
 
     cursor: pointer;
 

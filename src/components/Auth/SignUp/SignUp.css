@@ -1,0 +1,10 @@
+.auth-link-title {
+    color: #333;
+    margin-top: 5px;
+    font-family: "ProductSans-Light";
+}
+
+.auth-link {
+    color: #4CAF50;
+    cursor: pointer;
+}
