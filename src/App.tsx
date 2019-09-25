@@ -2,7 +2,28 @@ import React from "react";
 import {Auth} from "./components/Auth"
 import {AuthService} from "./middleware/index"
 
+import axios from "axios"
+
 export class App extends React.Component {
+
+    auth = async () => {
+        return await axios.post("http://lvh.me:3000/users", {
+            email: "sashabezrukovownmail@gmail.com",
+            password: "Sasha080701"
+        })
+    }
+
+    componentDidMount() {
+        // this.auth()
+        // .then(response => {
+        //     console.log(response)
+        // })
+        // .catch(error => {
+        //     console.log(error.response.data.error.message)
+        //     console.log(error.message)
+        // })
+    }
+
     render() {
         return(
             <>

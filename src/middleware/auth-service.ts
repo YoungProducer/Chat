@@ -12,18 +12,12 @@ export class AuthService implements I_AuthService {
     }
 
     async signUp(email: string, password: string): Promise<AxiosResponse<any>> {
-        try {
-            const credentials: I_AuthCredentials = {
-                email: email,
-                password: password
-            }
-
-            let res: AxiosResponse<any>;
-
-            return await axios.post("http://127.0.0.1:3000/users", credentials);
-        } catch (error) {
-            return error;
+        const credentials: I_AuthCredentials = {
+            email: email,
+            password: password
         }
+
+        return await axios.post("http://127.0.0.1:3000/users", credentials);
     }
 }
 

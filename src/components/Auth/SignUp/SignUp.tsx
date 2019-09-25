@@ -16,13 +16,12 @@ export interface I_SignUpState {
 
 export interface I_SignUpProps {
     authService?: I_AuthService,
-    responsesService?: ResponsesService
 }
 
 // TODO: Include popup window into SignIn and SignUp render method
 // It should slide from under them
 
-@inject('authService', 'responsesService')
+@inject('authService')
 export class SignUp extends React.Component<I_SignUpProps, I_SignUpState> {
     constructor(props: I_SignUpProps) {
         super(props);
@@ -59,7 +58,7 @@ export class SignUp extends React.Component<I_SignUpProps, I_SignUpState> {
     }
 
     buttonHandleOnClick = () => {
-        const { authService, responsesService } = this.props;
+        const { authService } = this.props;
         const { email, password, repeatedPassword, responseStatus} = this.state;
 
         const passwordMathced = authService.validatePassword(password, repeatedPassword);
@@ -67,12 +66,9 @@ export class SignUp extends React.Component<I_SignUpProps, I_SignUpState> {
         if (passwordMathced) {
             authService.signUp(email, password)
             .then(response => {
-                console.log(response)
-                console.log(response.statusText)
                 this.setState({
                     responseStatus: response.status
                 });
-                responsesService.setResponseStatus(response.status);
 
                 if (response.status === 200) {
                     this.setState({
@@ -81,22 +77,19 @@ export class SignUp extends React.Component<I_SignUpProps, I_SignUpState> {
                         repeatedPassword: "",
                         popUpPose: true
                     })
-                } else {
-                    this.setState({
-                        popUpPose: true
-                    })
-                }
+                } 
             })
             .catch(error => {
-                console.log(error.response);
                 this.setState({
-                    responseMessage: error.response.message,
+                    responseMessage: error.response.data.error.message,
                     popUpPose: true
                 });
-                responsesService.setMessage(error.response.message);
             });
         } else {
-            responsesService.setMessage("Passwords are different!");
+            this.setState({
+                responseMessage: "Passwords are different",
+                popUpPose: true
+            })
         }
     }
 
