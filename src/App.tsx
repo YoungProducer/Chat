@@ -2,6 +2,8 @@ import React from "react";
 import {Auth} from "./components/Auth"
 import {AuthService} from "./middleware/index"
 
+import { Routes } from "./components/routes";
+
 import axios from "axios"
 
 export class App extends React.Component {
@@ -31,7 +33,7 @@ export class App extends React.Component {
                 <SignUp signUp={signUp} />
                 <h1>SignIn</h1>
                 <SignIn signIn={signIn} /> */}
-                <Auth />
+                <Routes />
             </>
         )
     }
