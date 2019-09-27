@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 
 interface IS_Validate {
     token: string
@@ -13,16 +14,32 @@ export class Validate extends React.Component<{}, IS_Validate> {
         }
     }
 
-    componentDidMount() {
-        let url = decodeURI(window.location.hash)
-
-        url = url.split('').reverse().join('')
-        url = url.slice(0, url.indexOf('/'))
-        url = url.split('').reverse().join('')
-
-        this.setState({
-            token: url
+    confirmaition = async (token: string) => {
+        await axios.get("http://127.0.0.1:3000/validate", {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
         })
+        .then(response => {
+            window.location.hash = "#/";
+        })
+        .catch(error => {
+            console.log(error.response);
+        })
+    }
+
+    getToken = (): string => {
+        const url = decodeURI(window.location.hash);
+
+        let token: string = url.split("").reverse().join("");
+        token = token.slice(0, token.indexOf("/"));
+        token = token.split("").reverse().join("");
+
+        return token;
+    }
+
+    componentDidMount () {
+        this.confirmaition(this.getToken());
     }
 
     render() {

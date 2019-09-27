@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from "axios";
+import { observable, action, computed } from "mobx";
 import { I_AuthCredentials, E_ActionResponse, I_RequestResponse } from "."
 
 export interface I_AuthService {
@@ -8,6 +9,23 @@ export interface I_AuthService {
 }
 
 export class AuthService implements I_AuthService {
+    @observable private loggedIn: boolean = false;
+
+    @action
+    logIn() {
+        this.loggedIn = true;
+    }
+
+    @action 
+    logOut() {
+        this.loggedIn = false;
+    }
+
+    @computed
+    get isLoggedIn() {
+        return this.loggedIn;
+    }
+
     validatePassword(password: string, repeatedPassword: string): boolean {
         return password === repeatedPassword;
     }
