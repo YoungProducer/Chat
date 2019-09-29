@@ -1,50 +1,98 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
+import { inject } from "mobx-react";
+import { EmailService, TokenService } from "../../middleware";
+
+interface IP_Validate {
+    emailService?: EmailService,
+    tokenService?: TokenService
+}
 
 interface IS_Validate {
-    token: string
+    token?: string,
+    alreadyVerified?: boolean
 };
 
-export class Validate extends React.Component<{}, IS_Validate> {
-    constructor(props: {}) {
-        super(props);
+// @inject("emailService", "tokenService")
+// export class Validate extends React.Component<IP_Validate, IS_Validate> {
+//     constructor(props: {}) {
+//         super(props);
 
-        this.state = {
-            token: ""
-        }
-    }
+//         this.state = {
+//             token: "",
+//             alreadyVerified: false
+//         }
+//     }
 
-    confirmaition = async (token: string) => {
-        await axios.get("http://127.0.0.1:3000/validate", {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
+//     componentDidMount () {
+//         const { emailService, tokenService } = this.props;
+
+//         const userId = parseInt(window.location.hash.slice(window.location.hash.indexOf("?" + 7), window.location.hash.length));
+//         const hash = window.location.hash.slice(0, window.location.hash.indexOf("?"));
+//         const token = tokenService.getToken(hash);
+
+//         emailService.confirmation(token, userId)
+//         .then(response => {
+//             console.log(response);
+//             tokenService.deactivateToken(token, userId)
+//             .then(response => {
+//                 console.log(response);
+//             })
+//             .catch(error => {
+//                 console.log(error.response);
+//             });
+//         })
+//         .catch(error => {
+//             console.log(error.response);
+//         });
+//     }
+
+//     render() {
+//         return(
+//             <div>
+//                 <p>Validation</p>
+//             </div>
+//         )
+//     }
+// }
+
+export const Validate = inject("emailService", "tokenService")((props: IP_Validate) => {
+    const [state, setState] = useState<IS_Validate>({
+        token: "", 
+        alreadyVerified: false
+    });
+
+    useEffect(() => {
+        const { emailService, tokenService } = props;
+
+        const userId = parseInt(window.location.hash.slice(window.location.hash.indexOf("?" + 7), window.location.hash.length));
+        const hash = window.location.hash.slice(0, window.location.hash.indexOf("?"));
+        const token = tokenService.getToken(hash);
+
+        emailService.confirmation(token, userId)
         .then(response => {
-            window.location.hash = "#/";
+            tokenService.deactivateToken(token, userId)
+            .then(response => {
+                window.setTimeout(() => {
+                    window.location.hash = "#/signin";
+                }, 1000);
+            })
+            .catch(error => {
+                window.location.hash = "#/";
+            });
         })
         .catch(error => {
-            console.log(error.response);
-        })
-    }
+            setState({
+                alreadyVerified: true
+            });
+            window.location.hash = "#/";
+        });
+    }, []) 
 
-    getToken = (): string => {
-        const url = decodeURI(window.location.hash);
-
-        let token: string = url.split("").reverse().join("");
-        token = token.slice(0, token.indexOf("/"));
-        token = token.split("").reverse().join("");
-
-        return token;
-    }
-
-    componentDidMount () {
-        this.confirmaition(this.getToken());
-    }
-
-    render() {
-        return(
+    return (
+        <div>
             <p>Validation</p>
-        )
-    }
-}
+            {state.alreadyVerified ? "Email is already verified" : null}
+        </div>
+    )
+})

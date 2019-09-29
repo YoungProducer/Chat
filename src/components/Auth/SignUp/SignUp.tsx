@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import {inject} from "mobx-react";
+import {NavLink} from "react-router-dom";
 import {AuthService, I_AuthService} from "../../../middleware";
 import {ErrorPopUp} from "../";
 import "./SignUp.css";
@@ -128,7 +129,7 @@ export class SignUp extends React.Component<I_SignUpProps, I_SignUpState> {
                     <p className="auth-input-title">Repeat your password</p>
                     <input className="auth-input" value={repeatedPassword}name="repeatedPassword" type="password" placeholder="repeated password" onChange={this.inputHandleOnChange} />
                     <button className="auth-confirmation" onClick={this.buttonHandleOnClick}>Sign up</button>
-                    <p className="auth-link-title">Have account? <span className="auth-link" onClick={() => callback("signIn")}>Sign in</span></p>
+                    <p className="auth-link-title">Have account? <NavLink to="/signin"><span className="auth-link">Sign in</span></NavLink></p>
                 </div>
             </div>
         )

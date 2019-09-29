@@ -1,6 +1,6 @@
 import React from "react";
 import { CSSTransition } from "react-transition-group";
-import "./ErrorPopUp.css"
+import "./PopUp.css"
 
 interface IP_ErrorPopUp {
     title?: string,

@@ -1,8 +1,10 @@
 import React from "react";
+import {inject} from "mobx-react";
+import {NavLink} from "react-router-dom";
 import {ErrorPopUp} from "../";
-import {inject} from "mobx-react"
 import "./SignIn.css"
 import { AuthService } from "../../../middleware";
+import { Cookies } from "../../../utils/cookies";
 
 export interface I_SignInState {
     email: string,
@@ -10,14 +12,20 @@ export interface I_SignInState {
     popUpState: boolean,
     responseMessage: string,
     token: string
-}
+};
 
 export interface I_SignInProps {
     authService?: AuthService,
-    callback?: any
-}
+    cookies?: Cookies
+};
 
-@inject("authService")
+
+
+
+// setCookie("user_email","bobthegreat@gmail.com",30); //set "user_email" cookie, expires in 30 days
+// var userEmail=getCookie("user_email");//"bobthegreat@gmail.com"
+
+@inject("authService", "cookies")
 export class SignIn extends React.Component<I_SignInProps, I_SignInState> {
     wrapper: HTMLDivElement;
 
@@ -65,18 +73,23 @@ export class SignIn extends React.Component<I_SignInProps, I_SignInState> {
     }
 
     buttonHandleOnClick = () => {
-        const {authService} = this.props;
+        const {authService, cookies} = this.props;
         const {email, password} = this.state;
+
+        
 
         authService.signIn(email, password)
         .then(response => {
             if (response.status === 200) {
+                cookies.setCookie("logged_in", "true", 1 / 12000);
+                authService.logIn();
                 this.setState({
                     token: response.data.token,
                     email: "",
                     password: ""
-                })
-            }
+                });
+            };
+            window.location.hash = "#/";
         })
         .catch(error => {
             this.setState({
@@ -87,7 +100,6 @@ export class SignIn extends React.Component<I_SignInProps, I_SignInState> {
     }  
 
     render() {
-        const {callback} = this.props;
         const { popUpState, responseMessage, email, password } = this.state;
 
         return(
@@ -100,7 +112,7 @@ export class SignIn extends React.Component<I_SignInProps, I_SignInState> {
                     <p className="auth-input-title">Enter your password</p>
                     <input className="auth-input" value={password} type="password" name="password" placeholder="password" onChange={this.inputHandleOnChange}/>
                     <button className="auth-confirmation" onClick={this.buttonHandleOnClick}>Sign in</button>
-                    <p className="auth-link-title">Don't have account? <span className="auth-link" onClick={() => callback("signUp")}>Sign up</span></p>
+                    <p className="auth-link-title">Don't have account? <NavLink to="/signup"><span className="auth-link">Sign up</span></NavLink></p>
                 </div>
             </div>
         )

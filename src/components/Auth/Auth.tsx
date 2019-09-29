@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {SignIn, SignUp, ErrorPopUp} from "./";
+import {SignIn, SignUp} from "./";
 import {AuthService} from "../../middleware";
 import "./Auth.css";
 import { inject, observer } from "mobx-react";
@@ -15,11 +15,11 @@ export const Auth = (props: IP_Auth) => {
             {/* <ErrorPopUp message={props.responsesService.responseMessage} pose="visible" /> */}
             {
                 type === "signUp" ? (
-                    <SignUp callback={setType}/>
+                    <SignUp/>
                 ) : (
-                    <SignIn callback={setType}/>
+                    <SignIn/>
                 )
             }
         </div>
     )
-}
+};

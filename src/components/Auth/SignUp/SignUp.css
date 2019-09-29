@@ -5,6 +5,7 @@
 }
 
 .auth-link {
+    font-family: "ProductSans-Light";
     color: #4CAF50;
     cursor: pointer;
 }
