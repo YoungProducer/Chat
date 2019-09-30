@@ -78,6 +78,7 @@ export const Validate = inject("emailService", "tokenService")((props: IP_Valida
                 }, 1000);
             })
             .catch(error => {
+                console.log(error.response)
                 window.location.hash = "#/";
             });
         })
@@ -85,6 +86,7 @@ export const Validate = inject("emailService", "tokenService")((props: IP_Valida
             setState({
                 alreadyVerified: true
             });
+            console.log(error.response)
             window.location.hash = "#/";
         });
     }, []) 

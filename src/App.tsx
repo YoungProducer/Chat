@@ -4,8 +4,10 @@ import {AuthService} from "./middleware/index"
 
 import { Routes } from "./components/routes";
 
-import axios from "axios"
+import axios, { AxiosRequestConfig } from "axios"
 
+import {Api} from "./middleware/api";
+const api = new Api();
 export class App extends React.Component {
 
     auth = async () => {
@@ -16,6 +18,16 @@ export class App extends React.Component {
     }
 
     componentDidMount() {
+        const config: AxiosRequestConfig = {
+            data: {
+                jwtEnabled: true,
+                token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InNhc2hhYmV6cnVrb3Zvd25tYWlsQGdtYWlsLmNvbSIsIm5hbWUiOiJzdHJpbmcgc3RyaW5nIiwiaWF0IjoxNTY5ODc1Nzc2LCJleHAiOjE1NzAwOTE3NzZ9.QA6kbFKWPIDDMIeonhoaO4lo2MOmzkijgfhiuooyWWQ"
+            }
+        }
+
+        api.axiosInstance.get("http://127.0.0.1:3000/users/me", config)
+            .then(response => console.log(response))
+            .catch(error => console.log(error.response));
         // this.auth()
         // .then(response => {
         //     console.log(response)

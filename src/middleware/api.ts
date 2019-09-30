@@ -1,0 +1,47 @@
+import axios, { AxiosRequestConfig, AxiosInstance } from "axios";
+
+interface Config {
+    [prop: string]: any
+}
+
+export class Api {
+    axiosInstance: AxiosInstance;
+    
+    constructor(config: AxiosRequestConfig = {}) {
+        this.axiosInstance = axios.create({
+            ...config || {
+                baseURL: "http://127.0.0.1:3000",
+                timeout: 10000
+            }
+        });
+
+        this.axiosInstance.interceptors.request.use(
+            request => this.requestJWTHandler(request)
+        )
+    }
+
+    isJWTEnabled = (config: AxiosRequestConfig) => {
+        return config.data.hasOwnProperty("jwtEnabled") && config.data.jwtEnabled ? 
+            true : false;
+    }
+
+    isJWRTEnabled = (config: AxiosRequestConfig) => {
+        return config.data.hasOwnProperty("jwrtEnabled") && !config.data.jwrtEnabled ?
+            false : true;
+    }
+
+    requestJWTHandler = (request: AxiosRequestConfig) => {
+        if (this.isJWTEnabled(request)) {
+            request.headers['Authorization'] = `Bearer ${request.data.token}`;
+        }
+
+        delete request.data.jwtEnabled;
+        delete request.data.token;
+        return request
+    }
+
+    // TODO: complete jwrt Handler
+    // requestJWRTHandler = (request: AxiosRequestConfig) => {
+    //     if (this.)
+    // }
+}
