@@ -1,9 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosInstance } from "axios";
 
-interface Config {
-    [prop: string]: any
-}
-
 export class Api {
     axiosInstance: AxiosInstance;
     
@@ -26,8 +22,8 @@ export class Api {
     }
 
     isJWRTEnabled = (config: AxiosRequestConfig) => {
-        return config.data.hasOwnProperty("jwrtEnabled") && !config.data.jwrtEnabled ?
-            false : true;
+        return config.data.hasOwnProperty("jwrtEnabled") && config.data.jwrtEnabled ?
+            true : false;
     }
 
     requestJWTHandler = (request: AxiosRequestConfig) => {
@@ -40,8 +36,14 @@ export class Api {
         return request
     }
 
-    // TODO: complete jwrt Handler
-    // requestJWRTHandler = (request: AxiosRequestConfig) => {
-    //     if (this.)
-    // }
+    requestJWRTHandler = (request: AxiosRequestConfig) => {
+        if (this.isJWRTEnabled(request)) {
+            request.headers['Authorization'] = `Bearer ${request.data.token} ${request.data.userId}`;
+        }
+
+        delete request.data.jwrtEnabled;
+        delete request.data.token;
+        delete request.data.userId;
+        return request;
+    }
 }
