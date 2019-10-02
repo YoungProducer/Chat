@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { observable, action, computed } from "mobx";
-import { I_AuthCredentials, E_ActionResponse, I_RequestResponse } from "."
+import { Api, I_AuthCredentials, E_ActionResponse, I_RequestResponse } from "."
 
 export interface I_AuthService {
     validatePassword(password: string, repeatedPassword: string): boolean,
@@ -8,7 +8,7 @@ export interface I_AuthService {
     signIn(email: string, password: string): Promise<AxiosResponse<any>>
 }
 
-export class AuthService implements I_AuthService {
+export class AuthService extends Api implements I_AuthService {
     @observable private loggedIn: boolean = false;
 
     @action

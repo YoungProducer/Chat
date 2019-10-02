@@ -1,8 +1,10 @@
-import axios, { AxiosRequestConfig, AxiosInstance } from "axios";
+import axios, { AxiosRequestConfig, AxiosInstance, AxiosResponse } from "axios";
 
 export class Api {
     axiosInstance: AxiosInstance;
-    
+    private m_accessToken: string;
+    private m_refreshToken: string
+
     constructor(config: AxiosRequestConfig = {}) {
         this.axiosInstance = axios.create({
             ...config || {
@@ -26,6 +28,12 @@ export class Api {
             true : false;
     }
 
+    isResHasTokens = (config: AxiosResponse) => {
+        return (config.data.hasOwnProperty("accessToken") && !config.data.accessToken)
+         && (config.data.hasOwnProperty("refreshToken") && !config.data.refreshToken)
+         ? true : false;
+    }
+
     requestJWTHandler = (request: AxiosRequestConfig) => {
         if (this.isJWTEnabled(request)) {
             request.headers['Authorization'] = `Bearer ${request.data.token}`;
@@ -45,5 +53,17 @@ export class Api {
         delete request.data.token;
         delete request.data.userId;
         return request;
+    }
+
+    responseHandler = (response: AxiosResponse) => {
+        if (this.isResHasTokens(response)) {
+            this.m_accessToken = response.data.accessToken;
+            this.m_refreshToken = response.data.refreshToken;
+            console.log(this.m_refreshToken, this.m_accessToken);
+        }
+
+        delete response.data.accessToken;
+        delete response.data.refreshToken;
+        return response;
     }
 }
